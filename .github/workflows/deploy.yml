@@ -16,10 +16,10 @@ jobs:
       - name: Install NodeJS
         uses: actions/setup-node@v4
         with:
-          node-verions: 18
+          node-version: 18
 
       - name: Install Surge
-        run: npm install surge
+        run: npm install surge -g
 
       - name: Deploy to surge
         run: surge . ${{ vars.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
