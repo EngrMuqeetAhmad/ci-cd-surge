@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
+      - dev
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    environments: ${{github.ref_name == main && production || development }}
 
     steps:
       - name: Checkout repo
@@ -22,4 +25,9 @@ jobs:
         run: npm install surge -g
 
       - name: Deploy to surge
-        run: surge . ${{ vars.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+        env:
+          SURGE_DOMAIN: ${{vars.SURGE_DOMAIN}}
+          SURGE_DOMAIN_PREFIX: ${{vars.SURGE_DOMAIN_PREFIX}}
+          BUILD_DIR: ${{vars.BUILD_DIR}}
+          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
+        run: surge "$BUILD_DIR" "$SURGE_DOMAIN_PREFIX"-"$SURGE_DOMAIN" --token "$SURGE_TOKEN
