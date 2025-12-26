@@ -30,4 +30,4 @@ jobs:
           SURGE_DOMAIN_PREFIX: ${{vars.SURGE_DOMAIN_PREFIX}}
           BUILD_DIR: ${{vars.BUILD_DIR}}
           SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
-        run: surge "$BUILD_DIR" "$SURGE_DOMAIN_PREFIX"-"$SURGE_DOMAIN" --token "$SURGE_TOKEN
+        run: surge "$BUILD_DIR" "$SURGE_DOMAIN_PREFIX"-"$SURGE_DOMAIN" --token "$SURGE_TOKEN"
